@@ -258,11 +258,11 @@ def draw():
     # the lighthouse beam, sweeping right across sky and water
     lamp = (610, 330)
     poly([(618, 328), (1018, 272), (1018, 420), (618, 346)],
-         (255, 240, 200), alpha=0.05)
+         (255, 240, 200), alpha=0.10)
     poly([(618, 331), (1018, 300), (1018, 398), (618, 343)],
-         (255, 240, 200), alpha=0.07)
+         (255, 240, 200), alpha=0.14)
     poly([(618, 333), (1018, 322), (1018, 378), (618, 341)],
-         (255, 240, 200), alpha=0.09)
+         (255, 240, 200), alpha=0.19)
 
     # the rock
     poly([(512, 606), (700, 606), (668, 548), (612, 528), (556, 544),
@@ -332,8 +332,8 @@ def draw():
     for i in range(42):
         y = 612 + i * 8.5
         cx = 610 + math.sin(y * 0.045) * 9
-        wdt = max(12.0, 30 - i * 0.4)
-        hline(cx - wdt / 2, y, wdt, (238, 232, 205), 0.055, 2.6)
+        wdt = max(12.0, 36 - i * 0.45)
+        hline(cx - wdt / 2, y, wdt, (238, 232, 205), 0.085, 2.6)
     for i in range(8):
         y = 606 + i * 7
         hline(599 + math.sin(y * 0.06) * 5, y, 22, (205, 90, 75), 0.07, 2.4)
@@ -348,9 +348,19 @@ def draw():
         ln = rnd.uniform(8, 40)
         hline(x, y, ln, (150, 224, 212), rnd.uniform(0.04, 0.12), 2.2)
 
-    # two small boats with lanterns
+    # three small boats with lanterns
     boat(252, 806, 1.0)
     boat(792, 892, 0.78)
+    boat(884, 812, 1.12)
+
+    # warm reflections under the town's lit windows and lanterns
+    for i in range(16):
+        y = 640 + i * 9.5
+        for cx0 in (84, 167, 253, 340, 771, 857, 946):
+            cx = cx0 + math.sin(y * 0.05 + cx0) * 6
+            hline(cx - 9, y, 18, (255, 190, 110), 0.05, 2.4)
+
+    # foreground: dock posts and a sagging rope at the lower left
 
     # foreground: dock posts and a sagging rope at the lower left
     rect(16, 792, 206, 806, (10, 40, 50))
